@@ -10,20 +10,12 @@ public class PersonAward {
     @EmbeddedId
     private PersonAwardId id;
 
-    @ManyToOne(fetch = FetchType.LAZY,
-            cascade = CascadeType.REMOVE)
-    @MapsId("personInFilmId")
-    @JoinColumns({
-            @JoinColumn(name = "person_id", referencedColumnName = "personId"),
-            @JoinColumn(name = "film_id", referencedColumnName = "filmId"),
-            @JoinColumn(name = "role_id", referencedColumnName = "roleId")
-    })
+    @ManyToOne
+    @MapsId("personIdInFilm")
     private PersonInFilm person;
 
-    @ManyToOne(fetch = FetchType.LAZY,
-            cascade = CascadeType.REMOVE)
+    @ManyToOne
     @MapsId("awardId")
-    @JoinColumn(name = "award_id")
     private Award award;
 
     @Column(name = "isReceived")
@@ -31,30 +23,21 @@ public class PersonAward {
 
     public PersonAward() {}
 
-    public PersonAward(PersonInFilm person, Award award, boolean isReceived) {
-        this.person = person;
-        this.award = award;
+    public PersonAward(PersonAwardId id, boolean isReceived) {
+        this.id = id;
         this.isReceived = isReceived;
     }
 
-    public void setPerson(PersonInFilm person) {
-        this.person = person;
-    }
-
-    public void setAward(Award award) {
-        this.award = award;
+    public void setId(PersonAwardId id) {
+        this.id = id;
     }
 
     public void setReceived(boolean received) {
         isReceived = received;
     }
 
-    public PersonInFilm getPerson() {
-        return person;
-    }
-
-    public Award getAward() {
-        return award;
+    public PersonAwardId getId() {
+        return id;
     }
 
     public boolean isReceived() {

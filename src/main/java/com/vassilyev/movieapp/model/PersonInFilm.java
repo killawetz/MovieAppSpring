@@ -8,24 +8,21 @@ public class PersonInFilm {
     @EmbeddedId
     private PersonInFilmId personInFilmId;
 
-    @ManyToOne(fetch = FetchType.LAZY,
-    cascade = CascadeType.REMOVE)
+    @ManyToOne
     @MapsId("personId")
-    @JoinColumn(name = "person_id")
     private Person person;
 
-    @ManyToOne(fetch = FetchType.LAZY,
-    cascade = CascadeType.REMOVE)
+    @ManyToOne
     @MapsId("filmId")
-    @JoinColumn(name = "film_id")
     private Film film;
 
-    @ManyToOne(fetch = FetchType.LAZY,
-    cascade = CascadeType.REMOVE)
+    @ManyToOne
     @MapsId("roleId")
-    @JoinColumn(name = "role_id")
     private Role role;
 
+    /*@ManyToOne
+    @MapsId("person")
+    private PersonAward personAward;*/
 
     public PersonInFilm() {}
 

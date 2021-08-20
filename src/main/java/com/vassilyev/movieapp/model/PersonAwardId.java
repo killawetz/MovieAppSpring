@@ -13,22 +13,20 @@ without a "primary key class" via multiple @Id attributes.
 @Embeddable
 public class PersonAwardId implements Serializable {
 
-    @Column(name = "person_id_in_film_id")
-    private Long personInFilmId;
+    private Long personIdInFilm;
 
-    @Column(name = "award_id")
     private Long awardId;
 
     public PersonAwardId() {
     }
 
     public PersonAwardId(Long person_id, Long award_id) {
-        this.personInFilmId = person_id;
+        this.personIdInFilm = person_id;
         this.awardId = award_id;
     }
 
     public Long getPerson_id() {
-        return personInFilmId;
+        return personIdInFilm;
     }
 
     public Long getAward_id() {
@@ -36,7 +34,7 @@ public class PersonAwardId implements Serializable {
     }
 
     public void setPerson_id(Long person_id) {
-        this.personInFilmId = person_id;
+        this.personIdInFilm = person_id;
     }
 
     public void setAward_id(Long award_id) {
@@ -49,12 +47,12 @@ public class PersonAwardId implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PersonAwardId that = (PersonAwardId) o;
-        return Objects.equals(personInFilmId, that.awardId)
+        return Objects.equals(personIdInFilm, that.awardId)
                 && Objects.equals(awardId, that.awardId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(personInFilmId, awardId);
+        return Objects.hash(personIdInFilm, awardId);
     }
 }
