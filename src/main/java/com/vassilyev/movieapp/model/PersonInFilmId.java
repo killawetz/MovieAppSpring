@@ -9,20 +9,20 @@ import java.util.Objects;
 public class PersonInFilmId implements Serializable {
 
     @Column(name = "person_id")
-    private Long person_id;
+    private Long personId;
 
     @Column(name = "film_id")
-    private Long film_id;
+    private Long filmId;
 
     @Column(name = "role_id")
-    private Long role_id;
+    private Long roleId;
 
     public PersonInFilmId() {}
 
-    public PersonInFilmId(Long person_id, Long film_id, Long role_id) {
-        this.person_id = person_id;
-        this.film_id = film_id;
-        this.role_id = role_id;
+    public PersonInFilmId(Long personId, Long filmId, Long role_id) {
+        this.personId = personId;
+        this.filmId = filmId;
+        this.roleId = roleId;
     }
 
     @Override
@@ -30,35 +30,35 @@ public class PersonInFilmId implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PersonInFilmId that = (PersonInFilmId) o;
-        return Objects.equals(person_id, that.person_id) && Objects.equals(film_id, that.film_id) && Objects.equals(role_id, that.role_id);
+        return Objects.equals(personId, that.personId) && Objects.equals(filmId, that.filmId) && Objects.equals(roleId, that.roleId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(person_id, film_id, role_id);
+        return Objects.hash(personId, filmId, roleId);
     }
 
-    public void setPerson_id(Long person_id) {
-        this.person_id = person_id;
+    public void setPersonId(Long personId) {
+        this.personId = personId;
     }
 
-    public void setFilm_id(Long film_id) {
-        this.film_id = film_id;
+    public void setFilmId(Long filmId) {
+        this.filmId = filmId;
     }
 
-    public void setRole_id(Long role_id) {
-        this.role_id = role_id;
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 
-    public Long getPerson_id() {
-        return person_id;
+    public Long getPersonId() {
+        return personId;
     }
 
-    public Long getFilm_id() {
-        return film_id;
+    public Long getFilmId() {
+        return filmId;
     }
 
-    public Long getRole_id() {
-        return role_id;
+    public Long getRoleId() {
+        return roleId;
     }
 }

@@ -10,17 +10,24 @@ public class PersonInFilm {
 
     @ManyToOne(fetch = FetchType.LAZY,
     cascade = CascadeType.REMOVE)
+    @MapsId("personId")
+    @JoinColumn(name = "person_id")
     private Person person;
 
     @ManyToOne(fetch = FetchType.LAZY,
     cascade = CascadeType.REMOVE)
+    @MapsId("filmId")
+    @JoinColumn(name = "film_id")
     private Film film;
 
     @ManyToOne(fetch = FetchType.LAZY,
     cascade = CascadeType.REMOVE)
+    @MapsId("roleId")
+    @JoinColumn(name = "role_id")
     private Role role;
 
-    PersonInFilm() {}
+
+    public PersonInFilm() {}
 
     public PersonInFilm(Person person, Film film, Role role) {
         this.person = person;

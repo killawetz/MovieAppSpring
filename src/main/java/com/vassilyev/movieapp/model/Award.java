@@ -2,6 +2,7 @@ package com.vassilyev.movieapp.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Award {
@@ -14,12 +15,8 @@ public class Award {
     private String name;
 
 
-    @OneToMany(
-            mappedBy = "award",
-            orphanRemoval = true,
-            cascade = CascadeType.REMOVE
-    )
-    private List<PersonAward> personAwards;
+    @OneToMany(mappedBy = "award")
+    Set<PersonAward> awardPersons;
 
     public Award() {
     }

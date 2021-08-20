@@ -13,34 +13,34 @@ without a "primary key class" via multiple @Id attributes.
 @Embeddable
 public class PersonAwardId implements Serializable {
 
-    @Column(name = "person_id")
-    private Long person_in_film_id;
+    @Column(name = "person_id_in_film_id")
+    private Long personInFilmId;
 
     @Column(name = "award_id")
-    private Long award_id;
+    private Long awardId;
 
     public PersonAwardId() {
     }
 
     public PersonAwardId(Long person_id, Long award_id) {
-        this.person_in_film_id = person_id;
-        this.award_id = award_id;
+        this.personInFilmId = person_id;
+        this.awardId = award_id;
     }
 
     public Long getPerson_id() {
-        return person_in_film_id;
+        return personInFilmId;
     }
 
     public Long getAward_id() {
-        return award_id;
+        return awardId;
     }
 
     public void setPerson_id(Long person_id) {
-        this.person_in_film_id = person_id;
+        this.personInFilmId = person_id;
     }
 
     public void setAward_id(Long award_id) {
-        this.award_id = award_id;
+        this.awardId = award_id;
     }
 
 
@@ -49,11 +49,12 @@ public class PersonAwardId implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PersonAwardId that = (PersonAwardId) o;
-        return Objects.equals(person_in_film_id, that.person_in_film_id) && Objects.equals(award_id, that.award_id);
+        return Objects.equals(personInFilmId, that.awardId)
+                && Objects.equals(awardId, that.awardId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(person_in_film_id, award_id);
+        return Objects.hash(personInFilmId, awardId);
     }
 }

@@ -3,6 +3,7 @@ package com.vassilyev.movieapp.model;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(uniqueConstraints =
@@ -24,12 +25,8 @@ public class Person {
     @Temporal(TemporalType.DATE)
     private java.util.Date dateOfBirth;
 
-    @OneToMany(
-            mappedBy = "person",
-            orphanRemoval = true,
-            cascade = CascadeType.REMOVE
-    )
-    private List<PersonAward> personAwards;
+    @OneToMany(mappedBy = "person")
+    Set<PersonAward> personAwards;
 
     public Person() {
     }

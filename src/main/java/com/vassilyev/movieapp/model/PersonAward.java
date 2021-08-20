@@ -12,10 +12,18 @@ public class PersonAward {
 
     @ManyToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.REMOVE)
+    @MapsId("personInFilmId")
+    @JoinColumns({
+            @JoinColumn(name = "person_id", referencedColumnName = "personId"),
+            @JoinColumn(name = "film_id", referencedColumnName = "filmId"),
+            @JoinColumn(name = "role_id", referencedColumnName = "roleId")
+    })
     private PersonInFilm person;
 
     @ManyToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.REMOVE)
+    @MapsId("awardId")
+    @JoinColumn(name = "award_id")
     private Award award;
 
     @Column(name = "isReceived")
