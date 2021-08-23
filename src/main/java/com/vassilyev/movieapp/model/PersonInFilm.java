@@ -1,9 +1,8 @@
 package com.vassilyev.movieapp.model;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
+import javax.persistence.*;
+import java.lang.annotation.Target;
+import java.util.Set;
 
 @Entity
 public class PersonInFilm {
@@ -11,17 +10,20 @@ public class PersonInFilm {
     @EmbeddedId
     private PersonInFilmId id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("personId")
     private Person person;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("filmId")
     private Film film;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("roleId")
     private Role role;
+
+    @ManyToMany()
+    private Set<PersonAward> personAwards;
 
     public PersonInFilm() {}
 

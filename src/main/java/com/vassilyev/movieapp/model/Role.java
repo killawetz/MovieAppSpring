@@ -13,7 +13,7 @@ public class Role {
     @Column(name = "position", nullable = false, unique = true)
     private String position;
 
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "role")
     private Set<PersonInFilm> personInFilms;
 
     public Role() {

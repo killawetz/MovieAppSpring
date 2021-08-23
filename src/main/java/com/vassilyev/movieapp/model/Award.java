@@ -14,6 +14,9 @@ public class Award {
     @Column(name = "award_name", nullable = false, unique = true)
     private String name;
 
+    @OneToMany(mappedBy = "award")
+    private Set<PersonAward> personAwards;
+
     public Award() {
     }
 
