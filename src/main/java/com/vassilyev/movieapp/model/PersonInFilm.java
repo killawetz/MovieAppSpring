@@ -1,12 +1,15 @@
 package com.vassilyev.movieapp.model;
 
-import javax.persistence.*;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 
 @Entity
 public class PersonInFilm {
 
     @EmbeddedId
-    private PersonInFilmId personInFilmId;
+    private PersonInFilmId id;
 
     @ManyToOne
     @MapsId("personId")
@@ -19,10 +22,6 @@ public class PersonInFilm {
     @ManyToOne
     @MapsId("roleId")
     private Role role;
-
-    /*@ManyToOne
-    @MapsId("person")
-    private PersonAward personAward;*/
 
     public PersonInFilm() {}
 

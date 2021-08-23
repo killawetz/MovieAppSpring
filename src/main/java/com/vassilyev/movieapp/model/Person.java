@@ -25,8 +25,9 @@ public class Person {
     @Temporal(TemporalType.DATE)
     private java.util.Date dateOfBirth;
 
+
     @OneToMany(mappedBy = "person")
-    Set<PersonAward> personAwards;
+    private Set<PersonInFilm> personInFilms;
 
     public Person() {
     }
@@ -36,7 +37,6 @@ public class Person {
         this.countryOfBirth = countryOfBirth;
         this.dateOfBirth = dateOfBirth;
     }
-
 
     public void setName(String name) {
         this.name = name;
@@ -53,6 +53,8 @@ public class Person {
     public String getName() {
         return name;
     }
+
+
 
     public Country getCountryOfBirth() {
         return countryOfBirth;

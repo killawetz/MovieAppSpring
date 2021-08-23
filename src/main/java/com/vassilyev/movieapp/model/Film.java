@@ -57,6 +57,9 @@ public class Film {
     )
     private List<Genre> genres;
 
+    @OneToMany(mappedBy = "person")
+    private Set<PersonInFilm> personInFilms;
+
     public void setDescription(String description) {
         this.description = description;
     }

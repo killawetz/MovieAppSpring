@@ -3,7 +3,6 @@ package com.vassilyev.movieapp;
 import com.vassilyev.movieapp.model.Award;
 import com.vassilyev.movieapp.model.Country;
 import com.vassilyev.movieapp.model.Person;
-import com.vassilyev.movieapp.model.PersonAward;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
