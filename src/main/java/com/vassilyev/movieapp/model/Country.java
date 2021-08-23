@@ -17,6 +17,9 @@ public class Country {
     public Country() {
     }
 
+    public Country(String countryName) {
+        this.name = countryName;
+    }
 
     public void setName(String name) {
         this.name = name;

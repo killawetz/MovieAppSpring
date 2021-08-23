@@ -1,15 +1,25 @@
 package com.vassilyev.movieapp.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
-public class PersonAward {
+public class PersonAward implements Serializable {
 
 
     @Id
+    @ManyToOne
+    private PersonInFilm personInFilm;
+
+    @Id
+    @ManyToOne
+    private Award award;
+
+    @Column(name = "isReceived")
+    private boolean isReceived;
+
+    /*@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -17,7 +27,7 @@ public class PersonAward {
     private List<PersonInFilm> personInFilms = new ArrayList<>();
 
     @ManyToOne
-    private Award award;
+    private Award award;*/
 
 
     /*@EmbeddedId
@@ -31,33 +41,16 @@ public class PersonAward {
     @MapsId("awardId")
     private Award award;*/
 
-    @Column(name = "isReceived")
-    private boolean isReceived;
-
-
-    public PersonAward() {}
-
-    public void setPersonInFilms(List<PersonInFilm> personInFilms) {
-        this.personInFilms = personInFilms;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PersonAward that = (PersonAward) o;
+        return Objects.equals(personInFilm, that.personInFilm) && Objects.equals(award, that.award);
     }
 
-    public void setAward(Award award) {
-        this.award = award;
-    }
-
-    public void setReceived(boolean received) {
-        isReceived = received;
-    }
-
-    public List<PersonInFilm> getPersonInFilms() {
-        return personInFilms;
-    }
-
-    public Award getAward() {
-        return award;
-    }
-
-    public boolean isReceived() {
-        return isReceived;
+    @Override
+    public int hashCode() {
+        return Objects.hash(personInFilm, award);
     }
 }

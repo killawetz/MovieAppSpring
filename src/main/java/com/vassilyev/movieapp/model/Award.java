@@ -1,6 +1,7 @@
 package com.vassilyev.movieapp.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -15,7 +16,7 @@ public class Award {
     private String name;
 
     @OneToMany(mappedBy = "award")
-    private Set<PersonAward> personAwards;
+    private List<PersonAward> personAwards = new ArrayList<>();
 
     public Award() {
     }

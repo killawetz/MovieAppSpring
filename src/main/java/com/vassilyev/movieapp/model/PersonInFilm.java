@@ -1,13 +1,16 @@
 package com.vassilyev.movieapp.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.lang.annotation.Target;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-public class PersonInFilm {
+public class PersonInFilm implements Serializable {
 
-    @EmbeddedId
+    /*@EmbeddedId
     private PersonInFilmId id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -20,17 +23,25 @@ public class PersonInFilm {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("roleId")
+    private Role role;*/
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    private Person person;
+
+    @ManyToOne
+    private Film film;
+
+    @ManyToOne
     private Role role;
 
-    @ManyToMany()
-    private Set<PersonAward> personAwards;
+    @OneToMany(mappedBy = "personInFilm")
+    private List<PersonAward> personAwards = new ArrayList<>();
 
-    public PersonInFilm() {}
-
-    public PersonInFilm(Person person, Film film, Role role) {
-        this.person = person;
-        this.film = film;
-        this.role = role;
+    public PersonInFilm() {
     }
 
     public void setPerson(Person person) {
@@ -45,6 +56,10 @@ public class PersonInFilm {
         this.role = role;
     }
 
+    public void setPersonAwards(List<PersonAward> personAwards) {
+        this.personAwards = personAwards;
+    }
+
     public Person getPerson() {
         return person;
     }
@@ -55,5 +70,9 @@ public class PersonInFilm {
 
     public Role getRole() {
         return role;
+    }
+
+    public List<PersonAward> getPersonAwards() {
+        return personAwards;
     }
 }
