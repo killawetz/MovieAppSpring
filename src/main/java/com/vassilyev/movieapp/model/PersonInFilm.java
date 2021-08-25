@@ -38,10 +38,16 @@ public class PersonInFilm implements Serializable {
     @ManyToOne
     private Role role;
 
-    @OneToMany(mappedBy = "personInFilm")
+    @OneToMany(mappedBy = "personInFilm", cascade = CascadeType.ALL)
     private List<PersonAward> personAwards = new ArrayList<>();
 
     public PersonInFilm() {
+    }
+
+    public PersonInFilm(Person person, Film film, Role role) {
+        this.person = person;
+        this.film = film;
+        this.role = role;
     }
 
     public void setPerson(Person person) {

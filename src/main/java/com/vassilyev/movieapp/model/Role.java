@@ -1,6 +1,7 @@
 package com.vassilyev.movieapp.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -13,10 +14,14 @@ public class Role {
     @Column(name = "position", nullable = false, unique = true)
     private String position;
 
-    @OneToMany(mappedBy = "role")
-    private Set<PersonInFilm> personInFilms;
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
+    private Set<PersonInFilm> personInFilms = new HashSet<>();
 
     public Role() {
+    }
+
+    public Role(String position) {
+        this.position = position;
     }
 
     public String getPosition() {

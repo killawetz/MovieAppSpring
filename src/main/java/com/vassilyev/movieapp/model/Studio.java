@@ -1,12 +1,17 @@
 package com.vassilyev.movieapp.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Studio {
 
     public Studio() {
+    }
+
+    public Studio(String name) {
+        this.name = name;
     }
 
     @Id
@@ -16,8 +21,8 @@ public class Studio {
     @Column(name = "studio_name", nullable = false, unique = true)
     private String name;
 
-    @ManyToMany(mappedBy = "studios")
-    private List<Film> films;
+    @ManyToMany(mappedBy = "studios", cascade = CascadeType.ALL)
+    private List<Film> films = new ArrayList<>();
 
     public void setName(String name) {
         this.name = name;

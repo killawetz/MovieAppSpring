@@ -1,8 +1,9 @@
 package com.vassilyev.movieapp.model;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -22,12 +23,11 @@ public class Person {
     private Country countryOfBirth;
 
     @Column(name = "date_of_birth")
-    @Temporal(TemporalType.DATE)
-    private java.util.Date dateOfBirth;
+    private java.sql.Date dateOfBirth;
 
 
-    @OneToMany(mappedBy = "person")
-    private Set<PersonInFilm> personInFilms;
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    private Set<PersonInFilm> personInFilms = new HashSet<>();
 
     public Person() {
     }
@@ -46,7 +46,7 @@ public class Person {
         this.countryOfBirth = countryOfBirth;
     }
 
-    public void setDateOfBirth(java.util.Date dateOfBirth) {
+    public void setDateOfBirth(java.sql.Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -54,6 +54,9 @@ public class Person {
         return name;
     }
 
+    public Set<PersonInFilm> getPersonInFilms() {
+        return personInFilms;
+    }
 
 
     public Country getCountryOfBirth() {

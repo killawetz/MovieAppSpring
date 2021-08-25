@@ -2,6 +2,7 @@ package com.vassilyev.movieapp.model;
 
 import javax.annotation.Generated;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,12 +15,15 @@ public class Genre {
     @Column(name = "genre_name", nullable = false, unique = true)
     private String name;
 
-    @ManyToMany(mappedBy = "genres")
-    private List<Film> films;
+    @ManyToMany(mappedBy = "genres", cascade = CascadeType.ALL)
+    private List<Film> films = new ArrayList<>();
 
     public Genre() {
     }
 
+    public Genre(String name) {
+        this.name = name;
+    }
 
     public void setName(String name) {
         this.name = name;

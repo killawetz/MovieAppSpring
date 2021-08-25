@@ -1,6 +1,7 @@
 package com.vassilyev.movieapp.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,6 +14,8 @@ public class Country {
     @Column(name = "country_name", nullable = false, unique = true)
     private String name;
 
+    @ManyToMany(mappedBy = "countries", cascade = CascadeType.ALL)
+    private List<Film> films = new ArrayList<>();
 
     public Country() {
     }

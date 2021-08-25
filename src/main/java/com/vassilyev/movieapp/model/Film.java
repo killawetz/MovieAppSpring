@@ -1,6 +1,8 @@
 package com.vassilyev.movieapp.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -9,6 +11,14 @@ import java.util.Set;
 public class Film {
 
     public Film() {
+    }
+
+    public Film(String name, String description, int budget, int year, int runtime) {
+        this.name = name;
+        this.description = description;
+        this.budget = budget;
+        this.year = year;
+        this.runtime = runtime;
     }
 
     @Id
@@ -36,29 +46,29 @@ public class Film {
         this.name = name;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "studio_film",
             joinColumns = @JoinColumn(name = "film_id"),
             inverseJoinColumns = @JoinColumn(name = "studio_id")
     )
-    private List<Studio> studios;
+    private List<Studio> studios = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "country_film",
             joinColumns = @JoinColumn(name = "film_id"),
             inverseJoinColumns = @JoinColumn(name = "country_id")
     )
-    private List<Country> countries;
+    private List<Country> countries = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "genre_film",
             joinColumns = @JoinColumn(name = "film_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id")
     )
-    private List<Genre> genres;
+    private List<Genre> genres = new ArrayList<>();
 
-    @OneToMany(mappedBy = "film")
-    private Set<PersonInFilm> personInFilms;
+    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
+    private Set<PersonInFilm> personInFilms = new HashSet<>();
 
     public void setDescription(String description) {
         this.description = description;
@@ -96,5 +106,35 @@ public class Film {
         return runtime;
     }
 
+    public List<Studio> getStudios() {
+        return studios;
+    }
 
+    public List<Country> getCountries() {
+        return countries;
+    }
+
+    public List<Genre> getGenres() {
+        return genres;
+    }
+
+    public Set<PersonInFilm> getPersonInFilms() {
+        return personInFilms;
+    }
+
+    public void setStudios(List<Studio> studios) {
+        this.studios = studios;
+    }
+
+    public void setCountries(List<Country> countries) {
+        this.countries = countries;
+    }
+
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
+    }
+
+    public void setPersonInFilms(Set<PersonInFilm> personInFilms) {
+        this.personInFilms = personInFilms;
+    }
 }
