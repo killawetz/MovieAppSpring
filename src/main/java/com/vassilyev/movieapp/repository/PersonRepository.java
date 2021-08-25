@@ -1,4 +1,7 @@
 package com.vassilyev.movieapp.repository;
 
-public interface PersonRepository {
+import com.vassilyev.movieapp.model.Person;
+import org.springframework.data.repository.CrudRepository;
+
+public interface PersonRepository extends CrudRepository<Person, Long> {
 }

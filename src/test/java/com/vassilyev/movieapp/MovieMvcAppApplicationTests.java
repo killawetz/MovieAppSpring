@@ -1,6 +1,8 @@
 package com.vassilyev.movieapp;
 
 import com.vassilyev.movieapp.model.*;
+import com.vassilyev.movieapp.repository.GenreRepository;
+import com.vassilyev.movieapp.repository.PersonRepository;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
@@ -114,5 +116,21 @@ class MovieMvcAppApplicationTests {
 		entityManagerFactory.close();
 	}
 
+	@Autowired
+	private PersonRepository personRepository;
+	@Autowired
+	private GenreRepository genreRepository;
+	@Test
+	public void tryRepo() {
+		Genre dramaGenre = new Genre("Drama");
+
+
+		if(!genreRepository.existsGenreByName(dramaGenre.getName())) {
+			genreRepository.save(dramaGenre);
+		}
+
+		System.out.println("Genre is find?: " + genreRepository.findById(1L).get().getName());
+		System.out.println("Genre is find?: " + genreRepository.findById(2L).get().getName());
+	}
 
 }
