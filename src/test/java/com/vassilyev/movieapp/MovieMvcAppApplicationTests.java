@@ -1,8 +1,7 @@
 package com.vassilyev.movieapp;
 
 import com.vassilyev.movieapp.model.*;
-import com.vassilyev.movieapp.repository.GenreRepository;
-import com.vassilyev.movieapp.repository.PersonRepository;
+import com.vassilyev.movieapp.repository.*;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
@@ -120,6 +119,12 @@ class MovieMvcAppApplicationTests {
 	private PersonRepository personRepository;
 	@Autowired
 	private GenreRepository genreRepository;
+	@Autowired
+	private CountryRepository countryRepository;
+	@Autowired
+	private FilmRepository filmRepository;
+	@Autowired
+	private StudioRepository studioRepository;
 	@Test
 	public void tryRepo() {
 		Genre dramaGenre = new Genre("Drama");
@@ -131,6 +136,33 @@ class MovieMvcAppApplicationTests {
 
 		System.out.println("Genre is find?: " + genreRepository.findById(1L).get().getName());
 		System.out.println("Genre is find?: " + genreRepository.findById(2L).get().getName());
+	}
+
+	@Test
+	public void manyToManyTest() {
+		Film film1 = new Film("Pulp Fiction",
+				"Tarantino is god",
+				123123,
+				1994,
+				145);
+
+		String selectedFilmName = "Knocking on Heavens Door";
+		String selectedGenreName = "Comedy";
+
+/*
+		Film film1 = filmRepository.findFilmByName(selectedFilmName);
+*/
+
+		if(genreRepository.existsGenreByName(selectedGenreName)) {
+			Genre currentGenre = genreRepository.findByName(selectedGenreName);
+			film1.getGenres().add(currentGenre);
+			System.out.println(currentGenre.getName());
+			filmRepository.save(film1);
+		}
+
+
+		System.out.println(filmRepository.findById(7L).get().getGenres().toString());
+
 	}
 
 }

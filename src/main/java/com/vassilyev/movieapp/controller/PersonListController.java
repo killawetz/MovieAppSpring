@@ -5,12 +5,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class InfoController {
+public class PersonListController {
 
 
     @GetMapping("/info")
     public String info(Model model) {
-        return "info";
+        return "person_list";
     }
 
 }
