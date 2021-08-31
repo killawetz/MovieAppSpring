@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Movie List</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1>Movie List</h1>
+<a href="add_movie.html">Add movie</a>
+<br/><br/>
+<div>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Year</th>
+            <th>Budget</th>
+            <th>Runtime</th>
+            <th>Screenshot</th>
+        </tr>
+        <tr th:each ="key : ${listOfKeys}">
+            <td th:utext="${key.getName()}">...</td>
+            <td th:utext="${key.getDescription()}">...</td>
+            <td th:utext="${key.getYear()}">...</td>
+            <td th:utext="${key.getBudget()}">...</td>
+            <td th:utext="${key.getRuntime()}">...</td>
+            <td><img th:src="@{https://sun9-24.userapi.com/impg/IVfR5toBRmHQRb1hhPz7f40Cczaf74_0DsZCMg/GpFVfO-73BE.jpg?size=867x1080&quality=95&sign=f3ee0b8c16280bfc13218eae07a7c313&type=album}" width="100", height="100">...</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

@@ -16,9 +16,6 @@ import java.sql.Date;
 @SpringBootTest
 class MovieMvcAppApplicationTests {
 
-	@Autowired
-	private EntityManagerFactory entityManagerFactory;
-
 	@Test
 	void testDB() {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -93,6 +90,9 @@ class MovieMvcAppApplicationTests {
 		System.out.println(canada);
 
 	}
+
+	@Autowired
+	private EntityManagerFactory entityManagerFactory;
 
 
 	@Test
