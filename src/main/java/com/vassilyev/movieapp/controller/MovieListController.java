@@ -44,5 +44,12 @@ public class MovieListController {
         return "movie_list";
     }
 
+    @GetMapping("/add_movie")
+    public String addMovie(Model model) {
+
+
+        return "add_movie";
+    }
+
 
 }
