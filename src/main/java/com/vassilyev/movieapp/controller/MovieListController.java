@@ -3,6 +3,7 @@ package com.vassilyev.movieapp.controller;
 import com.vassilyev.movieapp.model.Film;
 import com.vassilyev.movieapp.model.Screenshot;
 import com.vassilyev.movieapp.repository.FilmRepository;
+import com.vassilyev.movieapp.repository.GenreRepository;
 import com.vassilyev.movieapp.repository.ScreenshotRepository;
 import com.vassilyev.movieapp.service.ScreenshotService;
 import com.vassilyev.movieapp.service.impl.ScreenshotServiceImpl;
@@ -21,6 +22,8 @@ public class MovieListController {
 
     @Autowired
     private FilmRepository filmRepository;
+    @Autowired
+    private GenreRepository genreRepository;
 
     final ScreenshotService screenshotService;
 
@@ -35,12 +38,9 @@ public class MovieListController {
         films = (List<Film>) filmRepository.findAll();
         HashMap<Film, Screenshot> filmScreenshotMap = screenshotService.findScreenListByFilms(films);
         model.addAttribute("filmMap", filmScreenshotMap);
-
-       /* Set<Film> filmSet = filmScreenshotMap.keySet();
-        for(Film key: filmSet) {
-            filmScreenshotMap.get(key).getUrl();
-        }*/
         model.addAttribute("listOfKeys", filmScreenshotMap.keySet());
+
+        model.addAttribute("genres", genreRepository.findAll());
         return "movie_list";
     }
 

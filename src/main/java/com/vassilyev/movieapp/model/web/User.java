@@ -17,14 +17,15 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min = 2, message = "Логин должен быть меньше 2-х знаков")
-    @NotBlank
+    @Size(min = 2, message = "Логин должен быть больше 2-х знаков")
+    @NotBlank(message = "Поле не может быть пустым или состоять из пробельных символов")
     private String username;
 
-    @Size(min = 2, message = "Пароль должен быть меньше 2-х знаков")
+    @Size(min = 2, message = "Пароль должен быть больше 2-х знаков")
+    @NotBlank(message = "Поле не может быть пустым или состоять из пробельных символов")
     private String password;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Utype> utypes;
 
     public User() {}
@@ -46,22 +47,22 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     public void setId(Long id) {

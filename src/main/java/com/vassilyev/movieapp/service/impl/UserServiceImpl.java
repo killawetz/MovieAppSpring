@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService{
 
     @Autowired
     UserRepository userRepository;
@@ -31,6 +31,10 @@ public class UserServiceImpl implements UserService {
             throw new UsernameNotFoundException("User not found");
         }
 
+        System.out.println("ВЫ ЧТО В КИОСКЕ");
+        System.out.println(user.getUsername());
+        System.out.println(user.getPassword());
+        System.out.println(bCryptPasswordEncoder.matches("qqq",user.getPassword()));
         return user;
     }
 
