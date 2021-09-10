@@ -13,4 +13,6 @@ public interface ScreenshotService {
     void deleteByFilmId(Film film);
 
     HashMap<Film, Screenshot> findScreenListByFilms(List<Film> films);
+
+    List<Screenshot> findAll();
 }

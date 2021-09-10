@@ -36,4 +36,9 @@ public class ScreenshotServiceImpl implements ScreenshotService {
         }
         return filmScreenshotMap;
     }
+
+    @Override
+    public List<Screenshot> findAll() {
+        return (List<Screenshot>) screenshotRepository.findAll();
+    }
 }

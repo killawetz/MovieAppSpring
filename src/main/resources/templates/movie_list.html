@@ -1,39 +1,70 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <title>Movie List</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* Float four columns side by side */
+        .column {
+            float: left;
+            width: 33%;
+            padding: 10px 10px;
+        }
+
+        /* Remove extra left and right margins, due to padding */
+        .row {margin: 0 -5px;}
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Responsive columns */
+        @media screen and (max-width: 600px) {
+            .column {
+                width: 100%;
+                display: table-row	;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* Style the counter cards */
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            padding: 16px;
+            text-align: center;
+            font-size: 75%;
+            width: 100%;
+            background-color: #f1f1f1;
+        }
+    </style>
 </head>
 <body>
-<h1>Movie List</h1>
-<a href="add_movie.html">Add movie</a>
-<br/><br/>
-<div class="form-group blu-margin">
-    <select class="form-control" th:field="${genres}"  id="dropOperator">
-        <option value="0">Select genre</option>
-        <option th:each="genre : ${genres}" th:value="${genre.getName()}" th:text="${genre.getName()}"></option>
-    </select>
+
+<h2>Responsive Column Cards</h2>
+<p>Resize the browser window to see the effect.</p>
+
+<div class="row">
+    <div th:each ="key : ${screenfilm}" class="column">
+        <div class="card">
+            <h3 th:utext="${key.getFilmId().getName()}">Card 1</h3>
+            <!-- <p th:utext="${key.getDescription()}">...</p>-->
+            <!--  <p th:utext="${key.getFilmId().getBudget()}">...</p>
+              <p th:utext="${key.getFilmId().getRuntime()}">...</p>-->
+            <p> <img th:src="${key.getUrl()}" width="250" height="250"></p>
+            <a th:href="@{/movie_details}">More info..</a>
+        </div>
+    </div>
 </div>
-<div>
-    <table border="1">
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Year</th>
-            <th>Budget</th>
-            <th>Runtime</th>
-            <th>Screenshot</th>
-        </tr>
-        <tr th:each ="key : ${listOfKeys}">
-            <td th:utext="${key.getName()}">...</td>
-            <td th:utext="${key.getDescription()}">...</td>
-            <td th:utext="${key.getYear()}">...</td>
-            <td th:utext="${key.getBudget()}">...</td>
-            <td th:utext="${key.getRuntime()}">...</td>
-            <td><img th:src="@{https://sun9-24.userapi.com/impg/IVfR5toBRmHQRb1hhPz7f40Cczaf74_0DsZCMg/GpFVfO-73BE.jpg?size=867x1080&quality=95&sign=f3ee0b8c16280bfc13218eae07a7c313&type=album}" width="100", height="100">...</td>
-        </tr>
-    </table>
-</div>
+
 </body>
 </html>

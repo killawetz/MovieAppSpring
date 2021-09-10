@@ -1,5 +1,7 @@
 package com.vassilyev.movieapp.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -29,6 +31,8 @@ public class Film {
     private String name;
 
     @Column(name = "description")
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
     private String description;
 
     @Column(name = "budget")

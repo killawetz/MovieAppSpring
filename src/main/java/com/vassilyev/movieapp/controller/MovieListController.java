@@ -24,7 +24,6 @@ public class MovieListController {
     private FilmRepository filmRepository;
     @Autowired
     private GenreRepository genreRepository;
-
     final ScreenshotService screenshotService;
 
     @Autowired
@@ -35,13 +34,14 @@ public class MovieListController {
     @GetMapping("/movies")
     public String info(Model model) {
         List<Film> films = new ArrayList<>();
-        films = (List<Film>) filmRepository.findAll();
-        HashMap<Film, Screenshot> filmScreenshotMap = screenshotService.findScreenListByFilms(films);
-        model.addAttribute("filmMap", filmScreenshotMap);
-        model.addAttribute("listOfKeys", filmScreenshotMap.keySet());
+       /* films = (List<Film>) filmRepository.findAll();
+        HashMap<Film, Screenshot> filmScreenshotMap = screenshotService.findScreenListByFilms(films);*/
+        List<Screenshot> screenshots = screenshotService.findAll();
+        model.addAttribute("screenfilm", screenshots);
+        /*model.addAttribute("listOfKeys", filmScreenshotMap.keySet());*/
 
         model.addAttribute("genres", genreRepository.findAll());
-        return "cards";
+        return "movie_list";
     }
 
     @GetMapping("/add_movie")
