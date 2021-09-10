@@ -41,7 +41,7 @@ public class MovieListController {
         model.addAttribute("listOfKeys", filmScreenshotMap.keySet());
 
         model.addAttribute("genres", genreRepository.findAll());
-        return "movie_list";
+        return "cards";
     }
 
     @GetMapping("/add_movie")

@@ -10,8 +10,8 @@
 <a href="add_movie.html">Add movie</a>
 <br/><br/>
 <div class="form-group blu-margin">
-    <select class="form-control" th:field="${genres.}"  id="dropOperator">
-        <option value="0">select operator</option>
+    <select class="form-control" th:field="${genres}"  id="dropOperator">
+        <option value="0">Select genre</option>
         <option th:each="genre : ${genres}" th:value="${genre.getName()}" th:text="${genre.getName()}"></option>
     </select>
 </div>
