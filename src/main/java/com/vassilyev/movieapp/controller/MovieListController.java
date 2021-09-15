@@ -11,11 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 public class MovieListController {
@@ -33,23 +34,23 @@ public class MovieListController {
 
     @GetMapping("/movies")
     public String info(Model model) {
-        List<Film> films = new ArrayList<>();
-       /* films = (List<Film>) filmRepository.findAll();
-        HashMap<Film, Screenshot> filmScreenshotMap = screenshotService.findScreenListByFilms(films);*/
-        List<Screenshot> screenshots = screenshotService.findAll();
-        model.addAttribute("screenfilm", screenshots);
-        /*model.addAttribute("listOfKeys", filmScreenshotMap.keySet());*/
+        List<Film> films = (List<Film>) filmRepository.findAll();
+        /*HashMap<Film, Screenshot> filmScreenshotMap = screenshotService.findScreenListByFilms(films);*/
+        model.addAttribute("films", films);
 
+        List<Screenshot> screenshots = screenshotService.findAll();
         model.addAttribute("genres", genreRepository.findAll());
         return "movie_list";
     }
 
-    @GetMapping("/add_movie")
-    public String addMovie(Model model) {
 
 
-        return "add_movie";
+    @PostMapping("/selectedMovie")
+    public String showMethod(@RequestParam(name="id", required=false) Long filmId, Model model) {
+        model.addAttribute("selectedMovie", filmRepository.findById(filmId).get());
+        return "selected_movie";
     }
+
 
 
 }

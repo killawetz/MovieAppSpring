@@ -33,4 +33,17 @@ public class FilmServiceImpl implements FilmService {
         return (List<Film>) filmRepository.findAll();
     }
 
+    @Override
+    public Film findById(Long id) {
+       return filmRepository.findById(id).get();
+    }
+
+    @Override
+    public void save(Film film) {
+        Film bufferFilm = findFilmByName(film.getName());
+        if(bufferFilm != null && bufferFilm.getYear() == film.getYear()) {
+            System.out.println("Такой фильм уже сущетсвует в базе данных");
+        }
+            filmRepository.save(film);
+    }
 }

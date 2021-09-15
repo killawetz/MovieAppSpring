@@ -3,10 +3,10 @@ package com.vassilyev.movieapp.model;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import java.util.*;
 
 @Entity()
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "year"})})
@@ -28,6 +28,7 @@ public class Film {
     private Long id;
 
     @Column(name = "name", nullable = false)
+    @NotBlank(message = "The name field cannot be empty")
     private String name;
 
     @Column(name = "description")
@@ -36,13 +37,19 @@ public class Film {
     private String description;
 
     @Column(name = "budget")
+    @Min(value = 0, message = "The budget value must be positive")
+    @Max(value = Integer.MAX_VALUE, message = "Too big value")
     private int budget;
 
+
     @Column(name = "year")
+    @Min(value = 0L, message = "The year value must be positive")
+    @Max(value = 2021, message = "The year value cannot be more than the current year (2021)"/* Calendar.getInstance().get(Calendar.YEAR)*/)
     private int year;
 
 
     @Column(name = "runtime")
+    @Min(value = 0, message = "The runtime value must be positive")
     private int runtime;
 
 
@@ -73,6 +80,10 @@ public class Film {
 
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
     private Set<PersonInFilm> personInFilms = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "filmId")
+    private List<Screenshot> screenshots = new ArrayList<>();
+
 
     public void setDescription(String description) {
         this.description = description;
@@ -110,6 +121,10 @@ public class Film {
         return runtime;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public List<Studio> getStudios() {
         return studios;
     }
@@ -124,6 +139,14 @@ public class Film {
 
     public Set<PersonInFilm> getPersonInFilms() {
         return personInFilms;
+    }
+
+    public List<Screenshot> getScreenshots() {
+        return screenshots;
+    }
+
+    public void setScreenshots(List<Screenshot> screenshots) {
+        this.screenshots = screenshots;
     }
 
     public void setStudios(List<Studio> studios) {

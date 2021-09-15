@@ -1,14 +1,31 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <title>Add Person</title>
+    <meta charset="UTF-8"/>
+    <title>Add Movie</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
 <h1>Add a new movie</h1>
 
-<input type="text" th:field=""
+<h1>Form</h1>
+<form action="#" th:action="@{/add_movie}" th:object="${film}" method="post">
+    <p>Name: <input type="text" th:field="*{name}"/>
+    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">NameError</p></p>
+
+    <p>Description: <input type="text" th:field="*{description}"/></p>
+
+    <p>Budget: <input type="number" th:field="*{budget}"/>
+    <p th:if="${#fields.hasErrors('budget')}" th:errors="*{budget}">BudgetError</p></p>
+
+    <p>Year: <input type="number" th:field="*{year}"/>
+    <p th:if="${#fields.hasErrors('year')}" th:errors="*{year}">YearError</p></p>
+
+    <p>Runtime: <input type="number" th:field="*{runtime}"/>
+    <p th:if="${#fields.hasErrors('runtime')}" th:errors="*{runtime}">RuntimeError</p></p>
+
+    <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+</form>
 
 </body>
 </html>

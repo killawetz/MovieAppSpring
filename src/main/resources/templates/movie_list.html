@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
@@ -19,7 +21,9 @@
         }
 
         /* Remove extra left and right margins, due to padding */
-        .row {margin: 0 -5px;}
+        .row {
+            margin: 0 -5px;
+        }
 
         /* Clear floats after the columns */
         .row:after {
@@ -32,7 +36,7 @@
         @media screen and (max-width: 600px) {
             .column {
                 width: 100%;
-                display: table-row	;
+                display: table-row;
                 margin-bottom: 20px;
             }
         }
@@ -49,19 +53,28 @@
     </style>
 </head>
 <body>
-
+<div sec:authorize="hasRole('ROLE_ADMIN')">
+    <button type="button">
+        <a href="/add_movie">Add new movie</a>
+    </button>
+</div>
 <h2>Responsive Column Cards</h2>
 <p>Resize the browser window to see the effect.</p>
 
 <div class="row">
-    <div th:each ="key : ${screenfilm}" class="column">
+    <div th:each="film : ${films}" class="column">
         <div class="card">
-            <h3 th:utext="${key.getFilmId().getName()}">Card 1</h3>
+            <h3 th:utext="${film.getName()}">Card 1</h3>
             <!-- <p th:utext="${key.getDescription()}">...</p>-->
             <!--  <p th:utext="${key.getFilmId().getBudget()}">...</p>
               <p th:utext="${key.getFilmId().getRuntime()}">...</p>-->
-            <p> <img th:src="${key.getUrl()}" width="250" height="250"></p>
+            <p>
+                <img th:src="${film.getScreenshots().size() != 0} ? ${film.getScreenshots().get(0).getUrl()} : 'null value!'"
+                     width="250" height="250"></p>
             <a th:href="@{/movie_details}">More info..</a>
+            <form th:action="@{/selectedMovie(id=${film.getId()})}" method="POST">
+                <button type="submit" name="select">Select</button>
+            </form>
         </div>
     </div>
 </div>
