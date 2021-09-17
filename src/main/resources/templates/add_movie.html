@@ -4,6 +4,14 @@
     <meta charset="UTF-8"/>
     <title>Add Movie</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://unpkg.com/popper.js@1.14.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 </head>
 <body>
 <h1>Add a new movie</h1>
@@ -23,6 +31,27 @@
 
     <p>Runtime: <input type="number" th:field="*{runtime}"/>
     <p th:if="${#fields.hasErrors('runtime')}" th:errors="*{runtime}">RuntimeError</p></p>
+
+    <label>
+        <select name="filmGenres" multiple="multiple" class="selectpicker">
+            <option  th:each="genre: ${genreList} "
+                     th:value="${genre.getName()}" th:text="${genre.getName()}"></option>
+        </select>
+    </label>
+
+    <label>
+        <select name="filmCountries" multiple="multiple" class="selectpicker">
+            <option  th:each="country: ${countryList} "
+                     th:value="${country.getName()}" th:text="${country.getName()}"></option>
+        </select>
+    </label>
+
+    <label>
+        <select name="filmStudious" multiple="multiple" class="selectpicker">
+            <option  th:each="studio: ${studioList} "
+                     th:value="${studio.getName()}" th:text="${studio.getName()}"></option>
+        </select>
+    </label>
 
     <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
 </form>

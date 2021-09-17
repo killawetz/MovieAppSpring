@@ -15,13 +15,32 @@ public class Film {
     public Film() {
     }
 
-    public Film(String name, String description, int budget, int year, int runtime) {
+    public Film(String name,
+                String description,
+                int budget,
+                int year,
+                int runtime,
+                List<Genre> genres) {
+        this.name = name;
+        this.description = description;
+        this.budget = budget;
+        this.year = year;
+        this.runtime = runtime;
+        this.genres = genres;
+    }
+
+    public Film(String name,
+                String description,
+                int budget,
+                int year,
+                int runtime) {
         this.name = name;
         this.description = description;
         this.budget = budget;
         this.year = year;
         this.runtime = runtime;
     }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -163,5 +182,18 @@ public class Film {
 
     public void setPersonInFilms(Set<PersonInFilm> personInFilms) {
         this.personInFilms = personInFilms;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Film film = (Film) o;
+        return budget == film.budget && year == film.year && runtime == film.runtime && Objects.equals(id, film.id) && Objects.equals(name, film.name) && Objects.equals(description, film.description) && Objects.equals(studios, film.studios) && Objects.equals(countries, film.countries) && Objects.equals(genres, film.genres) && Objects.equals(personInFilms, film.personInFilms) && Objects.equals(screenshots, film.screenshots);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description, budget, year, runtime, studios, countries, genres, personInFilms, screenshots);
     }
 }

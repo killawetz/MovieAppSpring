@@ -1,6 +1,7 @@
 package com.vassilyev.movieapp.controller;
 
 import com.vassilyev.movieapp.model.Film;
+import com.vassilyev.movieapp.model.Genre;
 import com.vassilyev.movieapp.model.Screenshot;
 import com.vassilyev.movieapp.repository.FilmRepository;
 import com.vassilyev.movieapp.repository.GenreRepository;
@@ -39,7 +40,8 @@ public class MovieListController {
         model.addAttribute("films", films);
 
         List<Screenshot> screenshots = screenshotService.findAll();
-        model.addAttribute("genres", genreRepository.findAll());
+
+
         return "movie_list";
     }
 

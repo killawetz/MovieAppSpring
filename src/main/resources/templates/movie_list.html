@@ -65,9 +65,6 @@
     <div th:each="film : ${films}" class="column">
         <div class="card">
             <h3 th:utext="${film.getName()}">Card 1</h3>
-            <!-- <p th:utext="${key.getDescription()}">...</p>-->
-            <!--  <p th:utext="${key.getFilmId().getBudget()}">...</p>
-              <p th:utext="${key.getFilmId().getRuntime()}">...</p>-->
             <p>
                 <img th:src="${film.getScreenshots().size() != 0} ? ${film.getScreenshots().get(0).getUrl()} : 'null value!'"
                      width="250" height="250"></p>
