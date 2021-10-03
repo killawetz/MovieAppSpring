@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import java.sql.SQLOutput;
 
 @SpringBootTest
@@ -46,9 +48,18 @@ public class ReposServiceTest {
         System.out.println(selectedFilm.getPersonInFilms().toString());
     }
 
+    @Autowired
+    private EntityManagerFactory entityManagerFactory;
+
     @Test
     void screenTest() {
-        Long filmId = 4L;
-        System.out.println(filmRepository.findById(filmId).get().getScreenshots().get(0).getUrl());
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        entityManager.getTransaction().begin();
+
+       Film film = filmRepository.findById(11L).get();
+        System.out.println(film.getPersonInFilms());;
     }
+
+
 }

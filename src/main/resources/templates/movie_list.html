@@ -68,9 +68,8 @@
             <p>
                 <img th:src="${film.getScreenshots().size() != 0} ? ${film.getScreenshots().get(0).getUrl()} : 'null value!'"
                      width="250" height="250"></p>
-            <a th:href="@{/movie_details}">More info..</a>
             <form th:action="@{/selectedMovie(id=${film.getId()})}" method="POST">
-                <button type="submit" name="select">Select</button>
+                <button type="submit" name="select">More info</button>
             </form>
         </div>
     </div>

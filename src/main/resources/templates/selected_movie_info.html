@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:utext="${selectedMovie.getName()}">info</title>
+    <style>
+        .listdetail {
+            display: inline-block;
+            margin-left: 100px;
+            vertical-align: text-top;
+        }
+
+        .imageview {
+            float: right;
+        }
+
+        .table {
+            width: 50%;
+            margin-bottom: 20px;
+            border: 1px solid #dddddd;
+            border-collapse: collapse;
+        }
+
+        .table th {
+            font-weight: bold;
+            padding: 5px;
+            background: #efefef;
+            border: 1px solid #dddddd;
+        }
+
+        .table td {
+            border: 1px solid #dddddd;
+            padding: 5px;
+        }
+
+        caption {
+            font-weight: bold
+        }
+
+    </style>
+</head>
+<body>
+
+
+<div>
+    <div>
+        <p class="imageview">
+            <img th:src="${selectedMovie.getScreenshots().size() != 0} ?
+         ${selectedMovie.getScreenshots().get(0).getUrl()} : 'null value!'"
+            ></p>
+    </div>
+    <h4 th:inline="text">
+        Название:
+        <small th:text="${selectedMovie.getName()}">Имя</small>
+    </h4>
+    <h4 th:inline="text">
+        Описание:
+        <small th:text="${selectedMovie.getDescription()}">Имя</small>
+    </h4>
+    <h4 th:inline="text">
+        Бюджет:
+        <small th:text="${selectedMovie.getBudget()}">Бюджет</small>
+    </h4>
+    <h4 th:inline="text">
+        Год:
+        <small th:text="${selectedMovie.getYear()}">Год</small>
+    </h4>
+    <h4 th:inline="text">
+        Длительность:
+        <small th:text="${selectedMovie.getRuntime()}">Длительность</small>
+    </h4>
+
+</div>
+
+<div class="listdetail">
+    <h4>Жанры:</h4>
+    <div th:each="genre : ${selectedMovie.getGenres()}">
+        <p th:text="${genre.getName()}"></p>
+    </div>
+</div>
+<div class="listdetail">
+    <h4>Страны:</h4>
+    <div th:each="country : ${selectedMovie.getCountries()}">
+        <p th:text="${country.getName()}"></p>
+    </div>
+</div>
+<div class="listdetail">
+    <h4>Студии:</h4>
+    <div th:each="studio : ${selectedMovie.getStudios()}">
+        <p th:text="${studio.getName()}"></p>
+    </div>
+</div>
+
+<table class="table">
+    <caption>Состав производственно-творческого коллектива</caption>
+    <tr>
+        <th>Person name</th>
+        <th>Date of birth</th>
+        <th>Role</th>
+        <th>Country of birth</th>
+    </tr>
+    <tr th:each="personinFilm: ${peopleInFilm}">
+        <td th:text="${personinFilm.getPerson().getName()}"></td>
+        <td th:text="${personinFilm.getPerson().getDateOfBirth()}"></td>
+        <td th:text="${personinFilm.getRole().getPosition()}"></td>
+        <td th:text="${personinFilm.getPerson().getCountryOfBirth().getName()}"></td>
+    </tr>
+</table>
+
+<table class="table">
+    <caption>Награды</caption>
+    <tr><th>Person name</th><th>Award name</th><th>Received</th></tr>
+    <tr th:each="pa: ${personAwardList}">
+        <td th:text="${pa.getPersonInFilm().getPerson().getName()}"></td>
+        <td th:text="${pa.getAward().getName()}"></td>
+        <td th:text="${pa.isReceived()}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

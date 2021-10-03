@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -50,23 +51,28 @@ public class AdminController {
         model.addAttribute("studioList", studious);
 
 
-
         return "add_movie";
     }
 
     @PostMapping("/add_movie")
-    public String addMovie(@ModelAttribute @Valid Film film,
-                           @RequestParam("filmGenres") String[] genres,
-                           @RequestParam("filmCountries") String[] countries,
-                           @RequestParam("filmStudious") String[] studious,
+    public String addMovie(@RequestParam(value = "filmGenres", required = false) String[] genres,
+                           @RequestParam(value = "filmCountries", required = false) String[] countries,
+                           @RequestParam(value = "filmStudious", required = false) String[] studious,
+                           @ModelAttribute @Valid Film film,
                            BindingResult bindingResult,
                            Model model) {
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             return "add_movie";
         }
-        film.setGenres(genreService.findByNameArray(genres));
-        film.setCountries(countryService.findByNameArray(countries));
-        film.setStudios(studioService.findByNameArray(studious));
+        if (genres != null) {
+            film.setGenres(genreService.findByNameArray(genres));
+        }
+        if (countries != null) {
+            film.setCountries(countryService.findByNameArray(countries));
+        }
+        if (studious != null) {
+            film.setStudios(studioService.findByNameArray(studious));
+        }
         filmService.save(film);
         model.addAttribute("film", film);
 

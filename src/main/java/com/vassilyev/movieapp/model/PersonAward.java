@@ -7,39 +7,42 @@ import java.util.Objects;
 @Entity
 public class PersonAward implements Serializable {
 
-
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @ManyToOne
     private PersonInFilm personInFilm;
 
-    @Id
     @ManyToOne
     private Award award;
 
     @Column(name = "isReceived")
     private boolean isReceived;
 
-    /*@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public PersonInFilm getPersonInFilm() {
+        return personInFilm;
+    }
 
-    @ManyToMany(mappedBy = "personAwards")
-    private List<PersonInFilm> personInFilms = new ArrayList<>();
+    public void setPersonInFilm(PersonInFilm personInFilm) {
+        this.personInFilm = personInFilm;
+    }
 
-    @ManyToOne
-    private Award award;*/
+    public Award getAward() {
+        return award;
+    }
 
+    public void setAward(Award award) {
+        this.award = award;
+    }
 
-    /*@EmbeddedId
-    private PersonAwardId id;
+    public boolean isReceived() {
+        return isReceived;
+    }
 
-    @ManyToOne
-    @MapsId("personInFilmId")
-    private PersonInFilm personInFilm;
-
-    @ManyToOne
-    @MapsId("awardId")
-    private Award award;*/
+    public void setReceived(boolean received) {
+        isReceived = received;
+    }
 
     @Override
     public boolean equals(Object o) {
